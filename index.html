@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FofuramaLab — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-bg: #FFF3F7;
+    --pink-card: #FFFFFF;
+    --pink-soft: #FFD9E8;
+    --pink-deep: #E8598B;
+    --pink-deeper: #C93C6C;
+    --lilac: #C9A9E0;
+    --mint: #B7E4D8;
+    --ink: #4A3B45;
+    --ink-soft: #8A7480;
+    --shadow: 0 10px 30px rgba(232, 89, 139, 0.14);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background: var(--pink-bg);
+    background-image:
+      radial-gradient(circle at 8% 12%, rgba(255,217,232,0.6) 0%, transparent 45%),
+      radial-gradient(circle at 92% 88%, rgba(201,169,224,0.35) 0%, transparent 40%);
+    color: var(--ink);
+    font-family: 'Quicksand', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  h1, h2, .brand, .price{
+    font-family: 'Baloo 2', sans-serif;
+  }
+
+  /* HERO */
+  header{
+    padding: 56px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doodles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:0.5;
+  }
+
+  .doodle{
+    position:absolute;
+    font-size: 28px;
+    animation: float 6s ease-in-out infinite;
+  }
+  .doodle:nth-child(1){ top:10%; left:6%; animation-delay:0s;}
+  .doodle:nth-child(2){ top:20%; right:8%; animation-delay:1.2s; font-size:22px;}
+  .doodle:nth-child(3){ bottom:15%; left:12%; animation-delay:2.1s; font-size:20px;}
+  .doodle:nth-child(4){ bottom:8%; right:14%; animation-delay:0.6s;}
+
+  @keyframes float{
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(8deg); }
+  }
+
+  .brand{
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    color: var(--pink-deeper);
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .brand .lab{ color: var(--lilac); }
+
+  .tagline{
+    margin-top: 10px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  .subtag{
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* GRID */
+  main{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 24px;
+  }
+
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    margin: 20px 4px 24px;
+  }
+
+  .section-label h2{
+    font-size: 1.4rem;
+    color: var(--pink-deeper);
+    font-weight: 700;
+  }
+
+  .section-label::after{
+    content:'';
+    flex:1;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--pink-soft) 0 8px, transparent 8px 14px);
+    border-radius: 4px;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+  }
+
+  .card{
+    background: var(--pink-card);
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display:flex;
+    flex-direction:column;
+    border: 2px solid transparent;
+  }
+
+  .card:hover{
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 0 16px 36px rgba(232, 89, 139, 0.22);
+    border-color: var(--pink-soft);
+  }
+
+  .thumb{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--pink-soft), #ffe8f1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 3rem;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .thumb::before{
+    content:'';
+    position:absolute;
+    top:-30%; left:-30%;
+    width:60%; height:60%;
+    background: rgba(255,255,255,0.5);
+    border-radius:50%;
+    filter: blur(10px);
+    z-index: 0;
+  }
+
+  .card h3{
+    font-family:'Baloo 2', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .desc{
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 14px;
+  }
+
+  .card-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+  }
+
+  .price{
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--pink-deeper);
+  }
+
+  .price::before{
+    content: 'R$ ';
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background: var(--pink-deep);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 100px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn:hover{
+    background: var(--pink-deeper);
+    transform: scale(1.05);
+  }
+
+  /* FOOTER CTA */
+  .footer-cta{
+    max-width: 700px;
+    margin: 60px auto 0;
+    text-align:center;
+    padding: 32px 24px;
+    background: linear-gradient(135deg, var(--lilac), var(--pink-deep));
+    border-radius: 28px;
+    color: white;
+    box-shadow: var(--shadow);
+  }
+
+  .footer-cta h3{
+    font-family:'Baloo 2', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  .footer-cta p{
+    font-size: 0.92rem;
+    opacity: 0.95;
+    margin-bottom: 18px;
+  }
+
+  .footer-cta .btn{
+    background: white;
+    color: var(--pink-deeper);
+    padding: 12px 26px;
+    font-size: 0.9rem;
+  }
+
+  .footer-cta .btn:hover{
+    background: #FFF3F7;
+  }
+
+  .note{
+    text-align:center;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 40px;
+    padding: 0 24px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .doodle{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="doodles">
+    <span class="doodle">✨</span>
+    <span class="doodle">🎀</span>
+    <span class="doodle">🌸</span>
+    <span class="doodle">💗</span>
+  </div>
+  <div class="brand">fofurama<span class="lab">lab</span></div>
+  <p class="tagline">impressões 3D fofas, delicadas e cheias de cor</p>
+  <p class="subtag">catálogo · peça pelo WhatsApp</p>
+</header>
+
+<main>
+  <div class="section-label"><h2>nossos produtinhos</h2></div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/porta-pinceis.jpg" alt="Porta-Pincéis Laço"></div>
+      <h3>Porta-Pincéis Laço</h3>
+      <p class="desc">Organizador em formato de laço para pincéis de maquiagem, com tampinha, nas cores rosa.</p>
+      <div class="card-footer">
+        <span class="price">39,90</span>
+        <a class="btn" href="#" data-item="Porta-Pincéis Laço">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/difusor-aromas.jpg" alt="Difusor de Aromas"></div>
+      <h3>Difusor de Aromas</h3>
+      <p class="desc">Difusor decorativo em formato de frasco com laço, tema Barbie, para deixar o ambiente cheiroso.</p>
+      <div class="card-footer">
+        <span class="price">49,90</span>
+        <a class="btn" href="#" data-item="Difusor de Aromas">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/porta-celular.jpg" alt="Porta Celular de Salto"></div>
+      <h3>Porta-Celular de Salto</h3>
+      <p class="desc">Suporte para celular em formato de sapato de salto com laço, super instagramável.</p>
+      <div class="card-footer">
+        <span class="price">34,90</span>
+        <a class="btn" href="#" data-item="Porta-Celular de Salto">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/kit-quadros.jpg" alt="Kit Quadros Provençais"></div>
+      <h3>Kit Quadros Provençais</h3>
+      <p class="desc">Kit com 4 quadros decorativos em moldura dourada, temas borboleta, flores, coroa e bailarina.</p>
+      <div class="card-footer">
+        <span class="price">89,90</span>
+        <a class="btn" href="#" data-item="Kit Quadros Provençais">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/letreiro-personalizado.jpg" alt="Letreiro Personalizado"></div>
+      <h3>Letreiro Personalizado</h3>
+      <p class="desc">Letreiro com nome personalizado, luz de LED, coroa e flores — perfeito para quarto ou presente.</p>
+      <div class="card-footer">
+        <span class="price">74,90</span>
+        <a class="btn" href="#" data-item="Letreiro Personalizado">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/copo-canudo.jpg" alt="Copo com Canudo"></div>
+      <h3>Copo com Canudo</h3>
+      <p class="desc">Copo texturizado tema Barbie com canudo decorado, ideal para presente ou uso no dia a dia.</p>
+      <div class="card-footer">
+        <span class="price">44,90</span>
+        <a class="btn" href="#" data-item="Copo com Canudo">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/porta-batom.jpg" alt="Porta-Batom Chaveiro"></div>
+      <h3>Porta-Batom Chaveiro</h3>
+      <p class="desc">Estojo texturizado com corações para guardar batom, com chaveiro e laço — leve para todo lugar.</p>
+      <div class="card-footer">
+        <span class="price">19,90</span>
+        <a class="btn" href="#" data-item="Porta-Batom Chaveiro">Pedir 💬</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb"><img src="imagens/nicho-parede.jpg" alt="Nicho de Parede"></div>
+      <h3>Nicho de Parede</h3>
+      <p class="desc">Nicho decorativo com luz de LED, temas Hello Kitty, castelo, nuvem ou coelhinho — vendido por unidade.</p>
+      <div class="card-footer">
+        <span class="price">64,90</span>
+        <a class="btn" href="#" data-item="Nicho de Parede">Pedir 💬</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-cta">
+    <h3>gostou de algum? 🎀</h3>
+    <p>Clique em "Pedir" no produto ou fale direto com a gente pelo WhatsApp — é rapidinho!</p>
+    <a class="btn" id="whatsapp-main" href="#">Chamar no WhatsApp</a>
+  </div>
+
+  <p class="note">Preços sujeitos a alteração · cores podem variar conforme disponibilidade de filamento 🌸</p>
+</main>
+
+<script>
+  // ATENÇÃO: troque o número abaixo pelo WhatsApp real (formato: 55DDDNUMERO, só dígitos)
+  const WHATSAPP_NUMBER = "5561900000000";
+
+  function buildLink(itemName){
+    const base = itemName
+      ? `Olá! Vim pelo catálogo do FofuramaLab e tenho interesse no item: ${itemName}. Ainda está disponível?`
+      : `Olá! Vim pelo catálogo do FofuramaLab e gostaria de fazer um pedido.`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(base)}`;
+  }
+
+  document.querySelectorAll('.btn[data-item]').forEach(btn => {
+    btn.href = buildLink(btn.getAttribute('data-item'));
+    btn.target = "_blank";
+  });
+
+  document.getElementById('whatsapp-main').href = buildLink();
+  document.getElementById('whatsapp-main').target = "_blank";
+</script>
+
+</body>
+</html>
